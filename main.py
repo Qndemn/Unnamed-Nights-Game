@@ -48,7 +48,7 @@ def flashlight():
    time.sleep(1.5)
 def stockton():
   global power, auxPower, door1, door2
-  stockton_speed = max(effective_speed - (night * 0.15), 0.35)
+  stockton_speed = max(effective_speed - (night * 0.15), 0.5)
   print("\n"*40)
   print("SELL! SELL! SELL!")
   time.sleep(1)
@@ -136,6 +136,7 @@ def main_game():
        input("(enter to continue :D)")
        timeLeft = 0
        night -= 2
+       return
     if checkersDistance <= 0:
        if checkerSide == "left" and door1:
           print("\nCheckers bangs on the left door...")
@@ -173,6 +174,7 @@ def main_game():
           input("\n(enter to continue :D)")
           timeLeft = 0
           night -= 2
+          return
     if checkersDistance > 0:
        checkersDistance -= 1
     if bishopDistance <= 0:
@@ -185,6 +187,7 @@ def main_game():
        input("\n(enter to continue :D)")
        timeLeft = 0
        night -= 2
+       return
     elif bishopDistance > 0:
        bishopDistance -= 1
     if stocktonDistance <= 0:
