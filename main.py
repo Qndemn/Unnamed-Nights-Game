@@ -63,11 +63,11 @@ def stockton():
       else:
         print("><>< ZZZT ><><")
         if power > 0:
-           power -= 15
+           power -= 50
            if power < 0:
               power = 0
         else:
-           auxPower -= 15
+           auxPower -= 50
            if auxPower < 0:
               auxPower = 0
         door1 = True
@@ -77,11 +77,11 @@ def stockton():
     except TimeoutOccurred:
       print("\n><>< ZZZT ><><")
       if power > 0:
-        power -= 15
+        power -= 50
         if power < 0:
           power = 0
       else:
-        auxPower -= 15
+        auxPower -= 50
         if auxPower < 0:
           auxPower = 0
       door1 = True
