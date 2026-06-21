@@ -21,7 +21,7 @@ charge = False
 
 def flashlight():
    global flashPower, bishopDistance
-   if flashPower > 0:
+   if flashPower >= 25:
       flashPower -= 25
       choice = input("Check:\n1. Front\n2. Left\n3. Right\n\nChoose (number): ")
       if choice == "1":
@@ -212,7 +212,7 @@ def main_game():
        flashPower = min(flashPower + random.randint(15, 30), 100)
        print("-) bweeeeee (-")
        time.sleep(1.5)
-    elif choice == "5":
+    elif choice == "5" and not door1 and not door2:
        if power > 0:
           power = min(power + random.randint(5, 15), 100)
        else:
@@ -220,6 +220,8 @@ def main_game():
        print("<>< bweeeee ><>")
        charge = True
        time.sleep(1.5)
+    elif choice == "5" and (door1 or door2):
+       print("!!! CANNOT CHARGE WHILE DOOR IS OPEN !!!")
 
 intro()
 
