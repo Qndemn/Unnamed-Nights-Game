@@ -9,13 +9,14 @@ auxPower = 100
 flashPower = 100
 door1 = False
 door2 = False
-night = 1
+night = 0
 effective_speed = 1.5
 stocktonDistance = 20
 checkersDistance = 25
 bishopDistance = 15
 checkerSides = ["left", "right"]
 checkerSide = random.choice(checkerSides)
+timeLeft = 50
 
 def flashlight():
    global flashPower, bishopDistance
@@ -91,29 +92,29 @@ def intro():
     input("\n(enter to continue) ")
 
 def main_game():
-    global door1, door2, power, auxPower, flashPower, checkerSide
+    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance
     if power > 0:
-       power -= 5
+       power -= 2
        if power < 0:
           power = 0
     elif auxPower > 0:
-       auxPower -= 5
+       auxPower -= 2
        if auxPower < 0:
           auxPower = 0
     if power > 0 and door1:
-       power -= 5
+       power -= 4
        if power < 0:
           power = 0
     elif auxPower > 0 and door1:
-       auxPower -= 5
+       auxPower -= 4
        if auxPower < 0:
           auxPower = 0
     if power > 0 and door2:
-       power -= 5
+       power -= 4
        if power < 0:
           power = 0
     elif auxPower > 0 and door2:
-       auxPower -= 5
+       auxPower -= 4
        if auxPower < 0:
           auxPower = 0
     if power == 0 and auxPower == 0:
@@ -170,7 +171,11 @@ def main_game():
        sys.exit()
     elif bishopDistance > 0:
        bishopDistance -= 1
-
+    if stocktonDistance <= 0:
+       stockton()
+       stocktonDistance = 20 - night * 2
+    elif stocktonDistance > 0:
+       stocktonDistance -= 1
     print("\n"*40)
     print("-=========== OFFICE ===========-")
     print(f"Power: {power}")
@@ -202,3 +207,14 @@ def main_game():
        else:
           auxPower = min(auxPower + random.randint(5, 15), 100)
        print("<>< bweeeee ><>")
+
+intro()
+
+while True:
+   night += 1
+   timeLeft = 50
+   checkerSide = random.choice(checkerSides)
+   print(f"-==== Night {night} ====-")
+   while timeLeft > 0:
+      timeLeft -= 1
+      main_game()
