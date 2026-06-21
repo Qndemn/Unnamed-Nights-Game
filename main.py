@@ -224,6 +224,7 @@ def main_game():
        time.sleep(1.5)
     elif choice == "5" and (door1 or door2):
        print("!!! CANNOT CHARGE WHILE DOOR IS OPEN !!!")
+       time.sleep(1)
 
 intro()
 
