@@ -17,7 +17,7 @@ bishopDistance = 15
 checkerSides = ["left", "right"]
 checkerSide = random.choice(checkerSides)
 timeLeft = 50
-choice = None
+choice = ""
 
 def flashlight():
    global flashPower, bishopDistance
@@ -93,7 +93,7 @@ def intro():
     input("\n(enter to continue) ")
 
 def main_game():
-    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance
+    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance, choice
     if power > 0:
        power -= 2
        if power < 0:
