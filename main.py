@@ -26,6 +26,8 @@ def flashlight():
       choice = input("Check:\n1. Front\n2. Left\n3. Right\n\nChoose (number): ")
       if choice == "1":
          bishopDistance += 3
+         if bishopDistance > 20:
+            bishopDistance = 20
          print("\n<< FLASH >>")
          time.sleep(0.25)
          print(f"\nThe Bishop is {bishopDistance} away.")
