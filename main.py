@@ -17,6 +17,7 @@ bishopDistance = 15
 checkerSides = ["left", "right"]
 checkerSide = random.choice(checkerSides)
 timeLeft = 50
+choice = None
 
 def flashlight():
    global flashPower, bishopDistance
