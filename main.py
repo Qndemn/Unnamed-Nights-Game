@@ -202,7 +202,7 @@ def main_game():
     print(f"Auxiliary Power: {auxPower}")
     print(f"Flashlight Power: {flashPower}")
     print(f"Door 1: {door1} - Door 2: {door2}")
-    print("\nOptions:\n1. Flashlight (then choose side)\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Auto switch to Aux on Panic Mode)")
+    print("\nOptions:\n1. Flashlight (then choose side)\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Aux cannot be charged)")
     choice = input("Choose (number): ")
     if choice == "1":
        flashlight()
@@ -225,7 +225,7 @@ def main_game():
        if power > 0:
           power = min(power + random.randint(5, 15), 100)
        else:
-          auxPower = min(auxPower + random.randint(5, 15), 100)
+          print("!!! POWER IS OUT, AUX CANNOT BE CHARGED !!!")
        print("<>< bweeeee ><>")
        charge = True
        time.sleep(1.5)
