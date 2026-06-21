@@ -117,6 +117,11 @@ def main_game():
        auxPower -= 4
        if auxPower < 0:
           auxPower = 0
+    if choice == 5:
+       if power > 0:
+          power += 2
+       elif auxPower > 0:
+          auxPower += 2
     if power == 0 and auxPower == 0:
        print("\n"*40)
        print("!!! BLACKOUT !!!")
@@ -177,11 +182,12 @@ def main_game():
     elif stocktonDistance > 0:
        stocktonDistance -= 1
     print("\n"*40)
+    print(f"TIME LEFT: {timeLeft}\n")
     print("-=========== OFFICE ===========-")
     print(f"Power: {power}")
     print(f"Auxiliary Power: {auxPower}")
     print(f"Flashlight Power: {flashPower}")
-    print(f"Door 1: {door1} -=- Door 2: {door2}")
+    print(f"Door 1: {door1} - Door 2: {door2}")
     print("\nOptions:\n1. Flashlight (then choose side)\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Auto switch to Aux on Panic Mode)")
     choice = input("Choose (number): ")
     if choice == "1":
@@ -200,13 +206,14 @@ def main_game():
     elif choice == "4":
        flashPower = min(flashPower + random.randint(15, 30), 100)
        print("-) bweeeeee (-")
-       time.sleep(0.75)
+       time.sleep(1.5)
     elif choice == "5":
        if power > 0:
           power = min(power + random.randint(5, 15), 100)
        else:
           auxPower = min(auxPower + random.randint(5, 15), 100)
        print("<>< bweeeee ><>")
+       time.sleep(1.5)
 
 intro()
 
