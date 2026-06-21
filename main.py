@@ -147,7 +147,7 @@ def main_game():
           print("BANG")
           time.sleep(0.75)
           print("... and retreats back into the darkness.")
-          checkersDistance = max(5, 25 - night * 1.5)
+          checkersDistance = int(max(5, 25 - night * 1.5))
           checkerSide = random.choice(checkerSides)
           time.sleep(1)
        elif checkerSide == "right" and door2:
@@ -160,7 +160,7 @@ def main_game():
           print("BANG")
           time.sleep(0.75)
           print("... and retreats back into the darkness.")
-          checkersDistance = max(5, 25 - night * 1.5)
+          checkersDistance = int(max(5, 25 - night * 1.5))
           checkerSide = random.choice(checkerSides)
           time.sleep(1)
        else:
@@ -189,7 +189,7 @@ def main_game():
        bishopDistance -= 1
     if stocktonDistance <= 0:
        stockton()
-       stocktonDistance = max(5, 20 - night * 1.5)
+       stocktonDistance = int(max(5, 20 - night * 1.5))
     elif stocktonDistance > 0:
        stocktonDistance -= 1
     print("\n"*40)
@@ -240,9 +240,9 @@ while True:
    auxPower = 100
    door1 = False
    door2 = False
-   stocktonDistance = max(5, 20 - night * 1.5)
-   checkersDistance = max(5, 25 - night * 1.5)
-   bishopDistance = max(6, 15 - night * 1.5)
+   stocktonDistance = int(max(5, 20 - night * 1.5))
+   checkersDistance = int(max(5, 25 - night * 1.5))
+   bishopDistance = int(max(6, 15 - night * 1.5))
    checkerSide = random.choice(checkerSides)
    print(f"-==== Night {night} ====-")
    startnight = night
