@@ -237,10 +237,15 @@ while True:
    timeLeft = 50
    checkerSide = random.choice(checkerSides)
    print(f"-==== Night {night} ====-")
+   startnight = night
    time.sleep(2)
    while timeLeft > 0:
       timeLeft -= 1
       main_game()
+   if timeLeft == 0 and startnight != night - 1:
+      print("\n"*40)
+      print("!!! 6 AM !!!")
+      time.sleep(1.5)
    if night == 6:
       print("\nY O U  W I N ! ! !")
       time.sleep(1)
