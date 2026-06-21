@@ -135,7 +135,7 @@ def main_game():
        time.sleep(0.5)
        input("(enter to continue :D)")
        timeLeft = 0
-       night -= 2
+       night -= 1
        return
     if checkersDistance <= 0:
        if checkerSide == "left" and door1:
@@ -173,7 +173,7 @@ def main_game():
           print("You died.")
           input("\n(enter to continue :D)")
           timeLeft = 0
-          night -= 2
+          night -= 1
           return
     if checkersDistance > 0:
        checkersDistance -= 1
@@ -186,7 +186,7 @@ def main_game():
        print("\nYou died.")
        input("\n(enter to continue :D)")
        timeLeft = 0
-       night -= 2
+       night -= 1
        return
     elif bishopDistance > 0:
        bishopDistance -= 1
@@ -253,12 +253,9 @@ while True:
    while timeLeft > 0:
       timeLeft -= 1
       main_game()
-   if timeLeft == 0 and startnight != night - 1:
+   if timeLeft == 0 and night == startnight:
       print("\n"*40)
       print("!!! 6 AM !!!")
       time.sleep(1.5)
-   if night == 6:
-      print("\nY O U  W I N ! ! !")
-      time.sleep(1)
-      input("\n\n(press enter to exit)")
-      sys.exit()
+   else:
+      continue
