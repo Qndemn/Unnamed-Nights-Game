@@ -219,4 +219,7 @@ while True:
       timeLeft -= 1
       main_game()
    if night == 6:
-      print("Y O U  W I N ! ! !")
+      print("\nY O U  W I N ! ! !")
+      time.sleep(1)
+      input("\n\n(press enter to exit)")
+      sys.exit()
