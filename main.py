@@ -235,6 +235,14 @@ intro()
 while True:
    night += 1
    timeLeft = 50
+   power = 100
+   flashPower = 100
+   auxPower = 100
+   door1 = False
+   door2 = False
+   stocktonDistance = 20 - night * 1.5
+   checkersDistance = 25 - night * 1.5
+   bishopDistance = 15 - night * 1.5
    checkerSide = random.choice(checkerSides)
    print(f"-==== Night {night} ====-")
    startnight = night
