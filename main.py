@@ -218,3 +218,5 @@ while True:
    while timeLeft > 0:
       timeLeft -= 1
       main_game()
+   if night == 6:
+      print("Y O U  W I N ! ! !")
