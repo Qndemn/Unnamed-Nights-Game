@@ -96,7 +96,7 @@ def intro():
     input("\n(enter to continue) ")
 
 def main_game():
-    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance, charge
+    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance, charge, night, timeLeft
     if power > 0:
        power -= 2
        if power < 0:
@@ -133,7 +133,9 @@ def main_game():
        time.sleep(0.5)
        print("\nYou Died.")
        time.sleep(0.5)
-       sys.exit()
+       input("(enter to continue :D)")
+       timeLeft = 0
+       night -= 2
     if checkersDistance <= 0:
        if checkerSide == "left" and door1:
           print("\nCheckers bangs on the left door...")
@@ -168,8 +170,9 @@ def main_game():
           print("\n\n-=== CHECKERS GOT IN ===-")
           print("To avoid Checkers, check to see which side he's on, and when he approaches, close the respective door.")
           print("You died.")
-          input("\n(enter to continue/crash the game bc im too lazy to add a restart :D)")
-          sys.exit()
+          input("\n(enter to continue :D)")
+          timeLeft = 0
+          night -= 2
     if checkersDistance > 0:
        checkersDistance -= 1
     if bishopDistance <= 0:
@@ -179,8 +182,9 @@ def main_game():
        print("\n\n-=== THE BISHOP GOT IN ===-")
        print("To avoid The Bishop, regularly flash him in the front hallway.")
        print("\nYou died.")
-       input("\n(enter to continue/crash the game bc im too lazy to add a restart :D)")
-       sys.exit()
+       input("\n(enter to continue :D)")
+       timeLeft = 0
+       night -= 2
     elif bishopDistance > 0:
        bishopDistance -= 1
     if stocktonDistance <= 0:
@@ -233,6 +237,7 @@ while True:
    timeLeft = 50
    checkerSide = random.choice(checkerSides)
    print(f"-==== Night {night} ====-")
+   time.sleep(2)
    while timeLeft > 0:
       timeLeft -= 1
       main_game()
