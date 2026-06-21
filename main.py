@@ -198,10 +198,8 @@ def main_game():
        stocktonDistance = int(max(5, 20 - night * 1.5))
     elif stocktonDistance > 0:
        stocktonDistance -= night
-       if timeLeft >= 5:
+       if timeLeft >= 5 and timeLeft <= 10:
           stocktonDistance -= 1
-       if timeLeft >= 10:
-          stocktonDistance += 1
     print("\n"*40)
     print(f"TIME LEFT: {timeLeft}\n")
     print("-=========== OFFICE ===========-")
