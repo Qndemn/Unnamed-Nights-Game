@@ -296,6 +296,8 @@ while True:
    checkersDistance = int(max(5, 25 - night * 1.5))
    bishopDistance = int(max(6, 15 - night * 1.5))
    checkerSide = random.choice(checkerSides)
+   phoneActive = False
+   callType = None
    print(f"-==== Night {night} ====-")
    startnight = night
    time.sleep(2)
