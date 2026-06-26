@@ -90,10 +90,21 @@ def stockton():
   time.sleep(0.75)
 
 def intro():
-    print("Welcome to Unnamed Nights Game!")
-    print("This game is meant to be a testing place as well as its own game.")
-    print("Please point out any errors or bugs, and I hope you enjoy the nights and bossfight!")
-    input("\n(enter to continue) ")
+   global night
+   print("Welcome to Unnamed Nights Game!")
+   print("This game is meant to be a testing place as well as its own game.")
+   print("Please point out any errors or bugs, and I hope you enjoy the nights and bossfight!")
+   choice = input("\n(enter to continue) ")
+   if choice == "1":
+     night = 1
+   elif choice == "2":
+     night = 2
+   elif choice == "3":
+     night = 3
+   elif choice == "4":
+     night = 4
+   elif choice == "5":
+     night = 5
 
 def main_game():
     global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance, charge, night, timeLeft
