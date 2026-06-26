@@ -186,7 +186,7 @@ def main_game():
           timeLeft = 0
           night -= 1
           return
-    if checkersDistance > 0:
+    if checkersDistance > night:
        if checkersDistance > night:
          checkersDistance -= night
        else:
