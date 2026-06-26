@@ -19,6 +19,12 @@ checkerSides = ["left", "right"]
 checkerSide = random.choice(checkerSides)
 timeLeft = 50
 charge = False
+phoneActive = False
+callType = None
+
+def phoneCall():
+   global phoneActive, callType
+   
 
 def flashlight():
    global flashPower, bishopDistance
