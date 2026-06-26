@@ -2,6 +2,7 @@ import random
 import time
 import sys
 from inputimeout import inputimeout, TimeoutOccurred
+import math
 
 inputs = ["1", "2", "3"]
 power = 100
@@ -187,8 +188,8 @@ def main_game():
           night -= 1
           return
     if checkersDistance > 0:
-       if checkersDistance > night:
-         checkersDistance -= night
+       if checkersDistance > night and night > 1:
+         checkersDistance = checkersDistance - math.ceil((night / 2))
        else:
          checkersDistance -= 1
     if bishopDistance <= 0:
