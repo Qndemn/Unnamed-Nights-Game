@@ -265,7 +265,7 @@ def main_game():
        flashPower = min(flashPower + random.randint(15, 30), 100)
        print("-) bweeeeee (-")
        time.sleep(1.5)
-    elif choice == "5" and not door1 and not door2:
+    elif choice == "5" and not door1 and not door2 and not phoneActive:
        if power > 0:
           power = min(power + random.randint(5, 15), 100)
        else:
