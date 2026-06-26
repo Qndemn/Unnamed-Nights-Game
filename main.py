@@ -23,8 +23,20 @@ phoneActive = False
 callType = None
 
 def phoneCall():
-   global phoneActive, callType
-   
+   global phoneActive, callType, stocktonDistance, checkersDistance
+   if power > 3:
+      choice = input("Phone Call:\n1. Commercials (Stockton speeds up but once eliminated starts farther away)\n2. Static (Stockton is paused)\n3. Turn Off Phone\nChoose (number): ")
+      if choice in["1", "2"]:
+         phoneActive = True
+      if choice == "1":
+         callType = "commercials"
+      elif choice == "2":
+         callType = "static"
+      elif choice == "3":
+         callType = None
+         phoneActive = False
+      else:
+         print("!! INVALID CHOICE !!")
 
 def flashlight():
    global flashPower, bishopDistance
@@ -114,7 +126,7 @@ def intro():
      night = 5
 
 def main_game():
-    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance, charge, night, timeLeft
+    global door1, door2, power, auxPower, flashPower, checkerSide, checkersDistance, bishopDistance, stocktonDistance, charge, night, timeLeft, callType, phoneActive
     if power > 0:
        power -= 2
        if power < 0:
@@ -139,6 +151,10 @@ def main_game():
        auxPower -= 4
        if auxPower < 0:
           auxPower = 0
+    if phoneActive and power > 3:
+       power -= 3
+    elif phoneActive and auxPower > 3:
+       auxPower -= 3
     if charge:
        charge = False
        if power > 0:
@@ -214,18 +230,23 @@ def main_game():
     if stocktonDistance <= 0:
        stockton()
        stocktonDistance = int(max(5, 20 - night * 1.5))
-    elif stocktonDistance > 0:
+       if callType == "commercials":
+          stocktonDistance += 15
+    elif stocktonDistance > 0 and callType != "static":
        stocktonDistance -= night
        if timeLeft >= 5 and timeLeft <= 10:
           stocktonDistance -= 1
+       if callType == "commercials":
+          stocktonDistance -= 5
     print("\n"*40)
     print(f"TIME LEFT: {timeLeft}\n")
     print("-=========== OFFICE ===========-")
     print(f"Power: {power}")
     print(f"Auxiliary Power: {auxPower}")
     print(f"Flashlight Power: {flashPower}")
+    print(f"Phone: {phoneActive} ({callType})")
     print(f"Door 1: {door1} - Door 2: {door2}")
-    print("\nOptions:\n1. Flashlight (then choose side)\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Aux can only be paused)")
+    print("\nOptions:\n1. Flashlight (then choose side)\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Aux can only be paused)\n6. Phone Call (then choose type)")
     choice = input("Choose (number): ")
     if choice == "1":
        flashlight()
@@ -252,8 +273,13 @@ def main_game():
        print("<>< bweeeee ><>")
        charge = True
        time.sleep(1.5)
-    elif choice == "5" and (door1 or door2):
-       print("!!! CANNOT CHARGE WHILE DOOR IS OPEN !!!")
+    elif choice == "5" and (door1 or door2 or phoneActive):
+       print("!!! CANNOT CHARGE WHILE DOOR IS OPEN OR PHONE IS ACTIVE !!!")
+       time.sleep(1)
+    elif choice == "6":
+       phoneCall()
+    else:
+       print("!!! INVALID INPUT !!!")
        time.sleep(1)
 
 intro()
