@@ -244,7 +244,7 @@ def main_game():
           stocktonDistance -= 5
     if stocktonDistance > 0 and callType == "static":
        if random.random() < 0.5:
-          stocktonDistance = max(20 - night * 1.5, stocktonDistance + 2)
+          stocktonDistance = int(max(20 - night * 1.5, stocktonDistance + 2))
     print("\n"*40)
     if stocktonDistance > 0:
       stocktonMarkets = random.randint(1, stocktonDistance)
