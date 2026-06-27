@@ -69,6 +69,7 @@ def flashlight():
    else:
       print("!! OUT OF FLASHLIGHT POWER !!")
    time.sleep(1.5)
+
 def stockton():
   global power, auxPower, door1, door2
   stockton_speed = max(effective_speed - (night * 0.15), 0.5)
@@ -95,7 +96,6 @@ def stockton():
               auxPower = 0
         door1 = True
         door2 = True
-        
         break
     except TimeoutOccurred:
       print("\n><>< ZZZT ><><")
