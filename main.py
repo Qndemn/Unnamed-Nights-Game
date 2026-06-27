@@ -25,7 +25,7 @@ callType = None
 def phoneCall():
    global phoneActive, callType, stocktonDistance, checkersDistance
    if power > 3 or auxPower > 3:
-      choice = input("Phone Call:\n1. Commercials (Stockton speeds up but once eliminated starts farther away)\n2. Static (Stockton is paused, and 1/4 chance of retreating by 2 each turn active)\n3. Turn Off Phone\nChoose (number): ")
+      choice = input("Phone Call:\n1. Commercials (Stockton speeds up but once eliminated starts farther away)\n2. Static (Stockton is paused, and 1/2 chance of retreating by 2 each turn active)\n3. Turn Off Phone\nChoose (number): ")
       if choice in["1", "2"]:
          phoneActive = True
       if choice == "1":
@@ -243,7 +243,7 @@ def main_game():
        if callType == "commercials":
           stocktonDistance -= 5
     if stocktonDistance > 0 and callType == "static":
-       if random.random() < 0.25:
+       if random.random() < 0.5:
           stocktonDistance += 2
     print("\n"*40)
     if stocktonDistance > 0:
