@@ -21,6 +21,7 @@ timeLeft = 50
 charge = False
 phoneActive = False
 callType = None
+bishopSetBack = 5
 
 def phoneCall():
    global phoneActive, callType, stocktonDistance, checkersDistance
@@ -43,12 +44,13 @@ def phoneCall():
       callType = None
 
 def flashlight():
-   global flashPower, bishopDistance
+   global flashPower, bishopDistance, bishopSetBack
    if flashPower >= 25:
       flashPower -= 25
       choice = input("Check:\n1. Front\n2. Left\n3. Right\n\nChoose (number): ")
       if choice == "1":
-         bishopDistance += 3
+         bishopSetBack = max(bishopSetBack - night, 2)
+         bishopDistance += bishopSetBack
          if bishopDistance > 20:
             bishopDistance = 20
          print("\n<< FLASH >>")
@@ -72,7 +74,7 @@ def flashlight():
 
 def stockton():
   global power, auxPower, door1, door2
-  stockton_speed = max(effective_speed - (night * 0.15), 0.5)
+  stockton_speed = max(effective_speed - (night * 0.15), 0.75)
   print("\n"*40)
   print("SELL! SELL! SELL!")
   time.sleep(1)
@@ -109,6 +111,7 @@ def stockton():
           auxPower = 0
       door1 = True
       door2 = True
+      break
   print("\nStockton Scurries Away...")
   time.sleep(0.75)
 
