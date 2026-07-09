@@ -174,7 +174,7 @@ def main_game():
        time.sleep(0.5)
        print("\nYou Died.")
        time.sleep(0.5)
-       input("(enter to continue :D)")
+       input("(Press Enter to restart :D) ")
        timeLeft = 0
        night -= 1
        return
@@ -212,7 +212,7 @@ def main_game():
           print("\n\n-=== CHECKERS GOT IN ===-")
           print("To avoid Checkers, check to see which side he's on, and when he approaches, close the respective door.")
           print("You died.")
-          input("\n(enter to continue :D)")
+          input("\n(Press Enter to restart :D)")
           timeLeft = 0
           night -= 1
           return
@@ -228,7 +228,7 @@ def main_game():
        print("\n\n-=== THE BISHOP GOT IN ===-")
        print("To avoid The Bishop, regularly flash him in the front hallway.")
        print("\nYou died.")
-       input("\n(enter to continue :D)")
+       input("\n(Press Enter to restart :D)")
        timeLeft = 0
        night -= 1
        return
@@ -267,7 +267,7 @@ def main_game():
     print(f"Auxiliary Power: {auxPower}")
     print(f"Flashlight Power: {flashPower}")
     print(f"Phone: {phoneActive} ({callType}) Stockton Markets: {stocktonMarkets}, {stocktonMarkets2}, {stocktonMarkets3}")
-    print(f"Door 1: {door1} - Door 2: {door2}")
+    print(f"Left Door: {door1} - Right Door: {door2}")
     print("\nOptions:\n1. Flashlight (then choose side)\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Aux can only be paused)\n6. Phone Call (then choose type)")
     choice = input("Choose (number): ")
     if choice == "1":
