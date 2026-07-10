@@ -37,19 +37,17 @@ fuse9 = True
 fuse10 = True
 burner = True
 timeFrozen = False
-BLACKOUT_THRESHOLD = 1.0
 
 
 def check_death():
     global power, auxPower
     return power <= 0 and auxPower <= 0
 
-
 def try_activate_blackout():
     global blackout, voltage
     if blackout:
         return False
-    if voltage >= BLACKOUT_THRESHOLD:
+    if random.random() < voltage:
         blackout = True
         voltage = 0.0
         return True
@@ -296,8 +294,8 @@ def stockFuse():
     fuses = [0.25] * FUSE_COUNT
 
     # Tuned drain + boost values
-    DRAIN_RATE = 0.0025
-    BOOST_AMOUNT = 0.3
+    DRAIN_RATE = 0.0025 / (overclockHp / 75)  # drain rate scales inversely with Overclock HP
+    BOOST_AMOUNT = 0.3 * (overclockHp / 75)  # boost amount scales with Overclock HP
     TICK_SPEED = 0.035
 
     running = True
@@ -383,11 +381,6 @@ def stockFuse():
                 if all(f >= 1.0 for f in fuses):
                     running = False
                     print("\nSUCCESS: All fuses stabilized at 100%.")
-                    if power > 0:
-                        power = min(power - 30, 0)
-                    elif auxPower > 0:
-                        auxPower = min(auxPower - 30, 0)
-                    voltage += 0.2
                     heat = True
                     return
 
@@ -451,12 +444,16 @@ def overclock():
     print("\n"*40)
     print("Mitchellson: ... Overclock is awake ...\n      ... If you hold on, I can kill it...\n... this is it...\n              ... We'll get you out... \n... hang in there.")
     input("\n(Press Enter to continue) ")
+    scale = max(1, int(overclockHp / 25))
+    overclockDoor = random.choice(["Left", "Right"])
+    overclockDistance = random.randint(5, scale + 5)
+    burner = True
     while overclockHp > 0:
       time.sleep(2)
       scale = max(1, int(overclockHp / 25))
       if overclockDistance > 0:
         overclockDistance -= 1
-      if overclockDistance == 0:
+      if overclockDistance <= 0:
         if overclockDoor == "Left":
             if door1:
                 for _ in range(15):
@@ -487,10 +484,11 @@ def overclock():
                 print("To damage Overclock, you must overheat the room. This will deal a chunk of damage on each use.")
                 input("(Press Enter to restart :D) ")
                 return
-      overclockDoor = random.choice(["Left", "Right"])
-      overclockDistance = random.randint(5, scale + 5)
-      burner = True
-      disable_random_fuse()
+      if overclockDistance <= 0:
+        overclockDoor = random.choice(["Left", "Right"])
+        overclockDistance = random.randint(5, scale + 5)
+        burner = True
+        disable_random_fuse()
       if overclockFront == -1:
           overclockFront = random.randint(3, scale + 3)
       else:
@@ -515,7 +513,7 @@ def overclock():
         power -= 2 / max(1, fusesOn)
         if power < 0:
             power = 0
-      if auxPower > 0:
+      elif auxPower > 0:
         auxPower -= (2 / max(1, fusesOn))
         if auxPower < 0:
           auxPower = 0
@@ -545,19 +543,11 @@ def overclock():
         print("\n"*40)
         print("!!! BLACKOUT !!!")
         time.sleep(1.5)
-      if blackout and all(f for f in [fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10]):
-        power = 0
-        auxPower = 0
-        fuse1 = False
-        fuse2 = False
-        fuse3 = False
-        fuse4 = False
-        fuse5 = False
-        fuse6 = False
-        fuse7 = False
-        fuse8 = False
-        fuse9 = False
-        fuse10 = False
+      if blackout:
+        for name in ["fuse1","fuse2","fuse3","fuse4","fuse5","fuse6","fuse7","fuse8","fuse9","fuse10"]:
+          globals()[name] = False
+          fusesOn = 0
+          power = 0
       if check_death():
         print("\n"*40)
         print("!!! ALL POWER DRAINED !!!")
@@ -601,9 +591,9 @@ def overclock():
             power = min(power + random.randint(5, 15), 100)
           else:
             print("!!! POWER IS OUT, AUX CAN ONLY BE PAUSED !!!")
-            print("<>< bweeeee ><>")
-            charge = True
-            time.sleep(1.5)
+          print("<>< bweeeee ><>")
+          charge = True
+          time.sleep(1.5)
       elif choice == "5" and (door1 or door2):
           print("!!! DOORS ARE OPEN, POWER CANNOT BE CHARGED !!!")
           time.sleep(1.5)
@@ -612,12 +602,13 @@ def overclock():
           burner = False
       elif choice == "7":
           breaker_box()
+          fusesOn = sum([fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10])
       elif choice == "8":
           timeFreeze()
       elif choice == "9":
           stockFuse()
 
-while True:
+while overclockHp > 0:
   overclock()
   power = 100
   auxPower = 100
