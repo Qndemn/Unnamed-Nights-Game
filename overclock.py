@@ -20,7 +20,6 @@ charge = False
 heat = False
 blackout = False
 voltage = 0
-blackoutDistance = 15
 overclockDistance = 8
 overclockFront = 10
 overclockDoor = None
@@ -144,9 +143,10 @@ def flashlightV2():
     if flashPower > 0:
         flashPower -= 25
         print(f"Overclock: {overclockFront}")
-        overclockFront = -1
         print("(<<< FLASH >>>)")
-        print("Overclock's distance was reset.")
+        if overclockFront <= 3:
+          print("Overclock's distance was reset.")
+          overclockFront = -1
     else:
         print("!!! OUT OF FLASHLIGHT POWER !!!")
 
@@ -165,7 +165,7 @@ def shortFuse():
     global blackout, power, auxPower, voltage
     duration_seconds = 20
     FUSE_COUNT = 5
-    DRAIN_RATE = 0.015 / (duration_seconds / 30)
+    DRAIN_RATE = 0.02
     BOOST_AMOUNT = 0.25
     TICK_SPEED = 0.1
 
@@ -295,7 +295,7 @@ def stockFuse():
 
     # Tuned drain + boost values
     DRAIN_RATE = 0.0025 / (overclockHp / 75)  # drain rate scales inversely with Overclock HP
-    BOOST_AMOUNT = 0.3 * (overclockHp / 75)  # boost amount scales with Overclock HP
+    BOOST_AMOUNT = 0.3 * (overclockHp / 60)  # boost amount scales with Overclock HP
     TICK_SPEED = 0.035
 
     running = True
@@ -509,6 +509,7 @@ def overclock():
           print("You died.")
           input("(Press Enter to restart :D) ")
           return
+      fusesOn = sum([fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10])
       if power > 0:
         power -= 2 / max(1, fusesOn)
         if power < 0:
@@ -544,10 +545,13 @@ def overclock():
         print("!!! BLACKOUT !!!")
         time.sleep(1.5)
       if blackout:
-        for name in ["fuse1","fuse2","fuse3","fuse4","fuse5","fuse6","fuse7","fuse8","fuse9","fuse10"]:
-          globals()[name] = False
-          fusesOn = 0
-          power = 0
+        # wipe ONCE
+        for name in [...]:
+            globals()[name] = False
+        fusesOn = 0
+        power = 0
+        # then STOP blackout
+        blackout = False
       if check_death():
         print("\n"*40)
         print("!!! ALL POWER DRAINED !!!")
@@ -575,6 +579,7 @@ def overclock():
       print(f"Voltage: {voltage:.2f}")
       print(f"Left Door: {door1} - Right Door: {door2}")
       print(f"\nOptions:\n1. Flashlight\n2. Open/Close Left\n3. Open/Close Right\n4. Charge Flashlight\n5. Charge Power (Aux can only be paused)\n6. Burner Phone ({'AVAILABLE' if burner else 'USED'})\n7. Breaker Box\n8. Fix Blackout (if available)\n9. OVERHEAT\n")
+      choice = ""
       choice = input("Choose (number): ")
       if choice == "1":
           flashlightV2()
