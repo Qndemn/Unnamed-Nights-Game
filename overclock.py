@@ -44,14 +44,10 @@ def check_death():
 
 def try_activate_blackout():
     global blackout, voltage
-    if blackout:
-        return False
     if random.random() < voltage:
         blackout = True
         voltage = 0.0
         return True
-    return False
-
 
 def disable_random_fuse():
     global fusesOn, fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10
@@ -66,77 +62,83 @@ def disable_random_fuse():
 
 def breaker_box():
     global fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10, fusesOn
-    print(f"Fuse 1: {'ON' if fuse1 else 'OFF'}")
-    print(f"Fuse 2: {'ON' if fuse2 else 'OFF'}")
-    print(f"Fuse 3: {'ON' if fuse3 else 'OFF'}")
-    print(f"Fuse 4: {'ON' if fuse4 else 'OFF'}")
-    print(f"Fuse 5: {'ON' if fuse5 else 'OFF'}")
-    print(f"Fuse 6: {'ON' if fuse6 else 'OFF'}")
-    print(f"Fuse 7: {'ON' if fuse7 else 'OFF'}")
-    print(f"Fuse 8: {'ON' if fuse8 else 'OFF'}")
-    print(f"Fuse 9: {'ON' if fuse9 else 'OFF'}")
-    print(f"Fuse 10: {'ON' if fuse10 else 'OFF'}")
-    fuseChosen = input("Choose a fuse to toggle (1-10): ")
-    if fuseChosen == "1":
-        fuse1 = not fuse1
-        if fuse1:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "2":
-        fuse2 = not fuse2
-        if fuse2:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "3":
-        fuse3 = not fuse3
-        if fuse3:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "4":
-        fuse4 = not fuse4
-        if fuse4:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "5":
-        fuse5 = not fuse5
-        if fuse5:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "6":
-        fuse6 = not fuse6
-        if fuse6:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "7":
-        fuse7 = not fuse7
-        if fuse7:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "8":
-        fuse8 = not fuse8
-        if fuse8:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "9":
-        fuse9 = not fuse9
-        if fuse9:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
-    elif fuseChosen == "10":
-        fuse10 = not fuse10
-        if fuse10:
-            fusesOn += 1
-        else:
-            fusesOn -= 1
+    fuseTurns = 0
+    if fusesOn <= 3:
+        fuseTurns = 3
+    else:
+        fuseTurns = 10 - fusesOn
+    for _ in range(fuseTurns):
+      print(f"Fuse 1: {'ON' if fuse1 else 'OFF'}")
+      print(f"Fuse 2: {'ON' if fuse2 else 'OFF'}")
+      print(f"Fuse 3: {'ON' if fuse3 else 'OFF'}")
+      print(f"Fuse 4: {'ON' if fuse4 else 'OFF'}")
+      print(f"Fuse 5: {'ON' if fuse5 else 'OFF'}")
+      print(f"Fuse 6: {'ON' if fuse6 else 'OFF'}")
+      print(f"Fuse 7: {'ON' if fuse7 else 'OFF'}")
+      print(f"Fuse 8: {'ON' if fuse8 else 'OFF'}")
+      print(f"Fuse 9: {'ON' if fuse9 else 'OFF'}")
+      print(f"Fuse 10: {'ON' if fuse10 else 'OFF'}")
+      fuseChosen = input("Choose a fuse to toggle (1-10): ")
+      if fuseChosen == "1":
+          fuse1 = not fuse1
+          if fuse1:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "2":
+          fuse2 = not fuse2
+          if fuse2:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "3":
+          fuse3 = not fuse3
+          if fuse3:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "4":
+          fuse4 = not fuse4
+          if fuse4:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "5":
+          fuse5 = not fuse5
+          if fuse5:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "6":
+          fuse6 = not fuse6
+          if fuse6:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "7":
+          fuse7 = not fuse7
+          if fuse7:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "8":
+          fuse8 = not fuse8
+          if fuse8:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "9":
+          fuse9 = not fuse9
+          if fuse9:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
+      elif fuseChosen == "10":
+          fuse10 = not fuse10
+          if fuse10:
+              fusesOn += 1
+          else:
+              fusesOn -= 1
 
 def flashlightV2():
     global flashPower, overclockFront
@@ -149,6 +151,7 @@ def flashlightV2():
           overclockFront = -1
     else:
         print("!!! OUT OF FLASHLIGHT POWER !!!")
+    time.sleep(1.5)
 
 def burner_phone():
     global voltage
@@ -160,6 +163,7 @@ def burner_phone():
       voltage = voltage + random.uniform(0.1, 0.25)
     else:
       print("## Nothing But Static ##")
+    time.sleep(1.5)
 
 def shortFuse():
     global blackout, power, auxPower, voltage
@@ -239,6 +243,7 @@ def shortFuse():
                 if any(f <= 0 for f in fuses):
                     running = False
                     print("\nFAILURE: A fuse burned out.")
+                    time.sleep(1)
                     break
 
                 # Player input
@@ -266,8 +271,10 @@ def shortFuse():
                 fuse9 = True
                 fuse10 = True
                 fusesOn = 10
+                time.sleep(1)
             else:
                 print("\nFAILURE: A fuse burned out.")
+                time.sleep(1)
 
         finally:
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
@@ -284,6 +291,7 @@ def timeFreeze():
         shortFuse()
     else:
         print("!! NO BLACKOUT !!")
+        time.sleep(1)
 
 def stockFuse():
     global power, voltage, heat, blackout
@@ -382,6 +390,7 @@ def stockFuse():
                     running = False
                     print("\nSUCCESS: All fuses stabilized at 100%.")
                     heat = True
+                    time.sleep(1)
                     return
 
                 # TIME OUT = failure
@@ -392,6 +401,7 @@ def stockFuse():
                     elif auxPower > 0:
                         auxPower = min(auxPower - 30, 0)
                     voltage += 0.2
+                    time.sleep(1)
                     break
 
                 # Burnout: ANY fuse hitting 0% = death
@@ -405,6 +415,7 @@ def stockFuse():
                       elif auxPower > 0:
                         auxPower = max(auxPower - 30, 0)
                       voltage += 0.2
+                      time.sleep(1)
                       return
 
                 # True ShortFuse input
@@ -435,12 +446,12 @@ def stockFuse():
             running = False
 
         print("\nStockFuse Challenge Ended.")
+        time.sleep(1)
 
     stockfuse_minigame(duration_seconds)
 
 def overclock():
     global power, auxPower, flashPower, overclockDistance, overclockFront, overclockDoor, voltage, timeFrozen, heat, burner, fusesOn, fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10, charge, door1, door2, overclockHp, blackout
-    time.sleep(1.5)
     print("\n"*40)
     print("Mitchellson: ... Overclock is awake ...\n      ... If you hold on, I can kill it...\n... this is it...\n              ... We'll get you out... \n... hang in there.")
     input("\n(Press Enter to continue) ")
@@ -550,8 +561,6 @@ def overclock():
             globals()[name] = False
         fusesOn = 0
         power = 0
-        # then STOP blackout
-        blackout = False
       if check_death():
         print("\n"*40)
         print("!!! ALL POWER DRAINED !!!")
