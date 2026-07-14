@@ -478,6 +478,33 @@ def overclock():
                 print("Overclock got in.")
                 print("To avoid Overclock, you must shine the flashlight at it when it is in front of you.\nIf it is at a door, you must close the door to avoid it.")
                 print("To damage Overclock, you must overheat the room. This will deal a chunk of damage on each use.")
+                power = 100
+                auxPower = 100
+                flashPower = 100
+                door1 = False
+                door2 = False
+                overclockHp = 100
+                charge = False
+                heat = False
+                blackout = False
+                voltage = 0
+                blackoutDistance = 15
+                overclockDistance = 8
+                overclockFront = 10
+                overclockDoor = None
+                fusesOn = 10
+                fuse1 = True
+                fuse2 = True
+                fuse3 = True
+                fuse4 = True
+                fuse5 = True
+                fuse6 = True
+                fuse7 = True
+                fuse8 = True
+                fuse9 = True
+                fuse10 = True
+                burner = True
+                timeFrozen = False
                 input("(Press Enter to restart :D) ")
                 return
         elif overclockDoor == "Right":
@@ -493,6 +520,33 @@ def overclock():
                 print("Overclock got in.")
                 print("To avoid Overclock, you must shine the flashlight at it when it is in front of you.\nIf it is at a door, you must close the door to avoid it.")
                 print("To damage Overclock, you must overheat the room. This will deal a chunk of damage on each use.")
+                power = 100
+                auxPower = 100
+                flashPower = 100
+                door1 = False
+                door2 = False
+                overclockHp = 100
+                charge = False
+                heat = False
+                blackout = False
+                voltage = 0
+                blackoutDistance = 15
+                overclockDistance = 8
+                overclockFront = 10
+                overclockDoor = None
+                fusesOn = 10
+                fuse1 = True
+                fuse2 = True
+                fuse3 = True
+                fuse4 = True
+                fuse5 = True
+                fuse6 = True
+                fuse7 = True
+                fuse8 = True
+                fuse9 = True
+                fuse10 = True
+                burner = True
+                timeFrozen = False
                 input("(Press Enter to restart :D) ")
                 return
       if overclockDistance <= 0:
@@ -518,6 +572,33 @@ def overclock():
           print("\n"*40)
           print("!!! ALL POWER DRAINED !!!")
           print("You died.")
+          power = 100
+          auxPower = 100
+          flashPower = 100
+          door1 = False
+          door2 = False
+          overclockHp = 100
+          charge = False
+          heat = False
+          blackout = False
+          voltage = 0
+          blackoutDistance = 15
+          overclockDistance = 8
+          overclockFront = 10
+          overclockDoor = None
+          fusesOn = 10
+          fuse1 = True
+          fuse2 = True
+          fuse3 = True
+          fuse4 = True
+          fuse5 = True
+          fuse6 = True
+          fuse7 = True
+          fuse8 = True
+          fuse9 = True
+          fuse10 = True
+          burner = True
+          timeFrozen = False
           input("(Press Enter to restart :D) ")
           return
       fusesOn = sum([fuse1, fuse2, fuse3, fuse4, fuse5, fuse6, fuse7, fuse8, fuse9, fuse10])
@@ -578,6 +659,10 @@ def overclock():
           print("\n"*40)
           print("Mitchellson: ... It's gone...\n       ... Perfect. \nI can talk to you normally now. We'll get you out of here.")
           input("\n(Press Enter to continue) ")
+          print("\n"*40)
+          print("Uhhhh yea that's about it i would add like an actual ending or bonus night, but")
+          time.sleep(2)
+          clear_screen()
           return
       print("\n"*40)
       print("TIME LEFT: ##\n")
@@ -621,33 +706,3 @@ def overclock():
           timeFreeze()
       elif choice == "9":
           stockFuse()
-
-while overclockHp > 0:
-  overclock()
-  power = 100
-  auxPower = 100
-  flashPower = 100
-  door1 = False
-  door2 = False
-  overclockHp = 100
-  charge = False
-  heat = False
-  blackout = False
-  voltage = 0
-  blackoutDistance = 15
-  overclockDistance = 8
-  overclockFront = 10
-  overclockDoor = None
-  fusesOn = 10
-  fuse1 = True
-  fuse2 = True
-  fuse3 = True
-  fuse4 = True
-  fuse5 = True
-  fuse6 = True
-  fuse7 = True
-  fuse8 = True
-  fuse9 = True
-  fuse10 = True
-  burner = True
-  timeFrozen = False
