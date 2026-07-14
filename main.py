@@ -3,6 +3,7 @@ import time
 import sys
 from inputimeout import inputimeout, TimeoutOccurred
 import math
+import overclock
 
 inputs = ["1", "2", "3"]
 power = 100
@@ -323,10 +324,14 @@ while True:
    print(f"-==== Night {night} ====-")
    startnight = night
    time.sleep(2)
-   while timeLeft > 0:
-      timeLeft -= 1
-      main_game()
-   if timeLeft == 0 and night == startnight:
+   if night != 6:
+     while timeLeft > 0:
+        timeLeft -= 1
+        main_game()
+   else:
+      while overclock.overclockHp > 0:
+         overclock.overclock()
+   if (timeLeft == 0 and night == startnight) or overclock.overclockHp <= 0:
       print("\n"*40)
       print("!!! 6 AM !!!")
       time.sleep(1.5)
