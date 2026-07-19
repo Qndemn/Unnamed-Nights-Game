@@ -3,6 +3,7 @@ import time
 import sys
 from inputimeout import inputimeout, TimeoutOccurred
 import math
+from jumpscare import clear_screen
 import overclock
 
 inputs = ["1", "2", "3"]
@@ -23,6 +24,33 @@ charge = False
 phoneActive = False
 callType = None
 bishopSetBack = 5
+
+def mitchellsonCall():
+   print("Mitchellson: ... Hey...")
+   time.sleep(1.5)
+   print("\n      ... sorry about this...")
+   time.sleep(1.5)
+   print("..... I'll explain just how to survive...")
+   time.sleep(1.5)
+   print("\n\n... We'll get you out of here...")
+   time.sleep(1.5)
+   print("... To avoid The Bishop, flash him regularly in the front hallway...")
+   time.sleep(2)
+   print("\n         ... to avoid Checkers, close the respective door when he's close...")
+   time.sleep(2)
+   print("... careful, he speeds up as nights go on...")
+   time.sleep(1.5)
+   print("\n      ... and for Stockton, you'll be able to predict his distance in the markets...")
+   time.sleep(2)
+   print("\n... you can alter his movement through the phone...")
+   time.sleep(1.5)
+   print("      ... that's all...")
+   time.sleep(1)
+   print("... we'll come as fast as we can...")
+   time.sleep(1.5)
+   clear_screen()
+   print("... good luck.")
+   input("(enter to continue) ")
 
 def phoneCall():
    global phoneActive, callType, stocktonDistance, checkersDistance
@@ -118,11 +146,13 @@ def stockton():
 
 def intro():
    global night
-   print("Welcome to Unnamed Nights Game!")
-   print("This game is meant to be a testing place as well as its own game.")
-   print("Please point out any errors or bugs, and I hope you enjoy the nights and bossfight!")
+   print("-=== Unnamed Nights Game ===-")
+   print("If you want to take the tutorial, enter '0' below.")
+   print("Otherwise, good luck.")
    choice = input("\n(enter to continue) ")
-   if choice == "1":
+   if choice == "0":
+      mitchellsonCall()
+   elif choice == "1":
      night = 1
    elif choice == "2":
      night = 2
@@ -328,6 +358,8 @@ while True:
      while timeLeft > 0:
         timeLeft -= 1
         main_game()
+   elif night >= 7:
+        intro()
    else:
       while overclock.overclockHp > 0:
          overclock.overclock()
