@@ -295,15 +295,21 @@ def timeFreeze():
 
 def stockFuse():
     global power, voltage, heat, blackout
-    duration_seconds = 35
+    duration_seconds = 60
     FUSE_COUNT = 5
 
     # Fuses start at 25%
     fuses = [0.25] * FUSE_COUNT
+    if overclockHp < 50:
+        fuses = [0.5] * FUSE_COUNT
 
     # Tuned drain + boost values
-    DRAIN_RATE = 0.0025 / (overclockHp / 75)  # drain rate scales inversely with Overclock HP
-    BOOST_AMOUNT = 0.3 * (overclockHp / 60)  # boost amount scales with Overclock HP
+    DRAIN_RATE = 0.0025 / (overclockHp / 30) # drain rate scales inversely with Overclock HP
+    DRAIN_RATE = min(DRAIN_RATE, 0.003)
+    DRAIN_RATE = max(DRAIN_RATE, 0.0018)
+    BOOST_AMOUNT = 0.3 * (overclockHp / 30)  # boost amount scales with Overclock HP
+    BOOST_AMOUNT = max(BOOST_AMOUNT, 0.23)
+    BOOST_AMOUNT = min(BOOST_AMOUNT, 0.3)
     TICK_SPEED = 0.035
 
     running = True
@@ -347,13 +353,13 @@ def stockFuse():
     def choose_fuse_prompt():
         """Priority: lowest → mid → highest (excluding 100%)."""
 
-        # Lowest: <25%
-        low = [i for i, f in enumerate(fuses) if f < 0.25]
-        if low:
-            return random.choice(low)
+        # Lowest: <35%
+        low = min(range(FUSE_COUNT), key=lambda i: fuses[i])
+        if fuses[low] < 0.35:
+            return low
 
         # Next: <35%
-        mid = [i for i, f in enumerate(fuses) if f < 0.35]
+        mid = [i for i, f in enumerate(fuses) if f < 0.4]
         if mid:
             return random.choice(mid)
 
@@ -437,7 +443,7 @@ def stockFuse():
                     else:
                         # Wrong fuse hit → penalty (only if not maxed)
                         if fuses[current_prompt] < 1.0:
-                            fuses[current_prompt] = max(0.0, fuses[current_prompt] - (BOOST_AMOUNT / 2))
+                            fuses[current_prompt] = max(0.0, fuses[current_prompt] - (BOOST_AMOUNT / 2.5))
 
                 time.sleep(TICK_SPEED)
 
@@ -445,7 +451,7 @@ def stockFuse():
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
             running = False
 
-        print("\nStockFuse Challenge Ended.")
+        print("\nChallenge Ended.")
         time.sleep(1)
 
     stockfuse_minigame(duration_seconds)
@@ -663,7 +669,7 @@ def overclock():
           print("Uhhhh yea that's about it i would add like an actual ending or bonus night, but")
           time.sleep(2)
           clear_screen()
-          return
+          break
       print("\n"*40)
       print("TIME LEFT: ##\n")
       print("-=========== OFFICE ===========-")
