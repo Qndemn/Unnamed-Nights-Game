@@ -144,7 +144,7 @@ def flashlightV2():
     global flashPower, overclockFront
     if flashPower > 0:
         flashPower -= 25
-        print(f"Overclock: {overclockFront - 2}")
+        print(f"Overclock: {overclockFront - 1}")
         print("(<<< FLASH >>>)")
         if overclockFront <= 3:
           print("Overclock's distance was reset.")
@@ -157,7 +157,7 @@ def burner_phone():
     global voltage
     if burner:
       mitchellsonLines = ["Hang in there.", "I'm on my way, pal.", "Keep fighting.", "Keep it hot.", "Weaken it.", "It can't last forever.", "We'll arrive shortly."]
-      print(f"Mitchellson: ... {overclockDoor} Door... \n        ... {overclockDistance - 2} away...")
+      print(f"Mitchellson: ... {overclockDoor} Door... \n        ... {overclockDistance - 1} away...")
       mitchellVoiceLine = random.choice(mitchellsonLines)
       print(mitchellVoiceLine)
       voltage = voltage + random.uniform(0.1, 0.25)
