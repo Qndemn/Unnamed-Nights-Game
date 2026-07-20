@@ -84,16 +84,16 @@ def flashlight():
             bishopDistance = 20
          print("\n<< FLASH >>")
          time.sleep(0.25)
-         print(f"\nThe Bishop is {bishopDistance} away.")
+         print(f"\nThe Bishop is {bishopDistance - 1} away.")
       elif choice == "2":
          if checkerSide == "left":
-            print(f"Checkers is {checkersDistance} away.")
+            print(f"Checkers is {checkersDistance - 1} away.")
             time.sleep(0.75)
          else:
             print("Nothing there.")
       elif choice == "3":
          if checkerSide == "right":
-            print(f"Checkers is {checkersDistance} away.")
+            print(f"Checkers is {checkersDistance - 1} away.")
             time.sleep(0.75)
          else:
             print("Nothing there.")
