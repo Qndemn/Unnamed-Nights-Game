@@ -23,7 +23,7 @@ timeLeft = 50
 charge = False
 phoneActive = False
 callType = None
-bishopSetBack = 5
+bishopSetBack = 6
 
 def mitchellsonCall():
    print("Mitchellson: ... Hey...")
@@ -78,7 +78,7 @@ def flashlight():
       flashPower -= 25
       choice = input("Check:\n1. Front\n2. Left\n3. Right\n\nChoose (number): ")
       if choice == "1":
-         bishopSetBack = max(5 - night, 2)
+         bishopSetBack = max(6 - night, 2)
          bishopDistance += bishopSetBack
          if bishopDistance > 20:
             bishopDistance = 20
